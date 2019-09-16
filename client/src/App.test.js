@@ -1,9 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import * as rtl from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import App from './App';
+import Nav from './components/Nav';
+
+test('renders without crashing', () => {
+  rtl.render(<App />);
+});
+
+test('Verify Nav and h1 is in place', () => {
+  const nav = rtl.render(<Nav />);
+  nav.getByText('Womens World Cup Players By Searches');
+});
+
+test('Verify dark mode is present', () => {
+  const nav = rtl.render(<Nav />);
+  nav.getByTestId(/dark-mode/i);
 });
